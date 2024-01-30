@@ -1,30 +1,30 @@
 import re
 
-class NumeroAutomata:
+class Automata:
     def __init__(self):
-        self.regex_entero = re.compile(r'^-?\d+$')
-        self.regex_flotante = re.compile(r'^-?\d+(\.\d+)?(e[-+]?\d+)?$')
-        self.regex_hexadecimal = re.compile(r'^-?0x[0-9a-fA-F]+$')
+        self.entero = re.compile(r'^-?\d+$')
+        self.flotante = re.compile(r'^-?\d+(\.\d+)?(e[-+]?\d+)?$')
+        self.hexadecimal = re.compile(r'^-?0x[0-9a-fA-F]+$')
 
-    def es_entero(self, cadena):
-        return bool(self.regex_entero.match(cadena))
+    def Esentero(self, cadena):
+        return bool(self.entero.match(cadena))
 
-    def es_flotante(self, cadena):
-        return bool(self.regex_flotante.match(cadena))
+    def Esflotante(self, cadena):
+        return bool(self.flotante.match(cadena))
 
-    def es_hexadecimal(self, cadena):
-        return bool(self.regex_hexadecimal.match(cadena))
+    def Eshexadecimal(self, cadena):
+        return bool(self.hexadecimal.match(cadena))
 
-automata = NumeroAutomata()
+automata = Automata()
 
 while True:
     print("Ingrese un numero para reconocer...")
     caso = input().strip()
-    if automata.es_entero(caso):
+    if automata.Esentero(caso):
         print(f"{caso} es un número entero.")
-    elif automata.es_flotante(caso):
+    elif automata.Esflotante(caso):
         print(f"{caso} es un número flotante.")
-    elif automata.es_hexadecimal(caso):
+    elif automata.Eshexadecimal(caso):
         print(f"{caso} es un número hexadecimal.")
     else:
         print(f"{caso} no es reconocido por el autómata.")
