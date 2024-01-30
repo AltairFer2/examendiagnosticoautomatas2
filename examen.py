@@ -13,6 +13,7 @@ class Aplicacion:
     def __init__(self, root):
         self.root = root
         root.title("Reconocedor de Números")
+        self.set_window_size(540, 120)
 
         self.reconocedor = NumeroReconocedor()
 
@@ -25,12 +26,25 @@ class Aplicacion:
         self.boton = tk.Button(root, text="Verificar", command=self.verificar)
         self.boton.pack()
 
+        self.info_label = tk.Label(root, text="Formatos válidos: Entero, Decimal, Hexadecimal, Científico (ej. 123, 23.45, 0x1A3, -4.5e+7)", justify=tk.LEFT)
+        self.info_label.pack()
+
     def verificar(self):
-        numero = self.entrada.get()
+        numero = self.entrada.get().replace(' ', '')  # Eliminar espacios
+        if not numero:
+            messagebox.showwarning("Advertencia", "Por favor, introduce un número.")
+            return
         if self.reconocedor.es_valido(numero):
             messagebox.showinfo("Resultado", f"'{numero}' es un número válido.")
         else:
             messagebox.showwarning("Resultado", f"'{numero}' no es un número válido.")
+
+    def set_window_size(self, width, height):
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        x = (screen_width - width) // 2
+        y = (screen_height - height) // 2
+        self.root.geometry(f'{width}x{height}+{x}+{y}')
 
 root = tk.Tk()
 app = Aplicacion(root)
